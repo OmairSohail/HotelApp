@@ -1,5 +1,6 @@
 import firebase from 'firebase'
 
+
 const firebaseConfig = {
   apiKey: "AIzaSyA1Jvwy4RctqbW62biHAYS37jx3pr63opI",
   authDomain: "nuxtproject-7d900.firebaseapp.com",
