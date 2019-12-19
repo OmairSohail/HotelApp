@@ -1,11 +1,11 @@
 <template>
-    <div>
+<div>
         <!--NavBar-->
     <nav class="navbar">
       <div class="container">
         <div class="navbar-brand">
           <a class="navbar-item">
-            <img src="@/images/logo.png" alt="Logo">
+            <img src="../images/logo.png" alt="Logo">
           </a>
           <span class="navbar-burger burger" data-target="navbarMenuHeroB">
             <span></span>
@@ -60,18 +60,24 @@
         <b-field>   
             <button class="button is-info is-medium is-fullwidth registerbtn" @click="submitName()">Register</button>
         </b-field>
+        <b-field>   
+            <nuxt-link to="/Users">See Created Records .....</nuxt-link>
+        </b-field>
        </section>
-    </div>
-    </div>
+    </div>  
+</div>
 </template>
 
 <script>
 import {namesRef} from '../plugins/firebase'
 
 export default {
+     
     data(){
       return{
-      name: 'OmairSohail'
+      name: '4slash',
+      email:'4slash@gmail.com',
+      password:'1234'
       }
     },
     methods:{
