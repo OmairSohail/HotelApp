@@ -56,6 +56,13 @@
         <b-field label="Confirm Password">
             <b-input type="password" password-reveal name="confirmpasswordfield"></b-input>
         </b-field>
+
+        <b-field label="Select a Department">
+            <b-select  required v-model="Department">
+                <option value="Developer">Developer</option>
+                <option value="Designer">Designer</option>
+            </b-select>
+        </b-field>
         <br>
         <b-field>   
             <button class="button is-info is-medium is-fullwidth registerbtn" @click="submitName()">Register</button>
@@ -77,7 +84,8 @@ export default {
       return{
       name: '4slash',
       email:'4slash@gmail.com',
-      password:'1234'
+      password:'1234',
+      Department:'Developer'
       }
     },
     methods:{
@@ -90,7 +98,8 @@ export default {
         Username: this.name,
         Email: this.email,
         Create_At: Date(),
-        Password:this.password
+        Password:this.password,
+        Department:this.Department
       }).then(alert('user created ...'))
     }
 }

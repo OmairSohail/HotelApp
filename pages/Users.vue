@@ -7,10 +7,19 @@
         <br>
     <b-table :data="data" :columns="columns"></b-table>
     </div>
-    <div class="Userlists">
-      <ul>
-          <li></li>
-      </ul>
+    <div class="container Userlist">
+       <ul class="list is-hoverable">
+           <li class="list-item title">Users</li>
+            <li class="list-item content" v-for="dt of data" v-bind:key="dt.id">
+                <span class="tag">
+                    {{dt.Department}}
+                    </span>
+                {{dt.Username}}
+            </li>
+        </ul>
+    </div>
+    <div class="whitespace">
+
     </div>
 </div>
 </template>
@@ -42,6 +51,11 @@ import OnlyNavbar from '../components/OnlyNavbar'
                         label: 'Email',
                     },
                     {
+                        field: 'Department',
+                        label: 'Department',
+                        centered: true
+                    },
+                    {
                         field: 'Date',
                         label: 'Date',
                         centered: true
@@ -54,7 +68,7 @@ import OnlyNavbar from '../components/OnlyNavbar'
             }
         },
         created(){
-           db.collection('Users').get()
+           db.collection('Users').orderBy('Department').get()
                 .then((snapshot) => {
                     snapshot.forEach((doc) => {
                         //Data Object
@@ -62,6 +76,7 @@ import OnlyNavbar from '../components/OnlyNavbar'
                       "id":doc.data().User_ID,
                       "Username":doc.data().Username,
                       "Email":doc.data().Email,
+                      "Department":doc.data().Department,
                       "Date":doc.data().Create_At,
                       "Password":doc.data().Password
                     }
@@ -78,5 +93,12 @@ import OnlyNavbar from '../components/OnlyNavbar'
 </script>
 
 <style scoped>
+.Userlist{
+    margin-top:4rem;
+    width:50%;
 
+}
+.whitespace{
+    height:700px;
+}
 </style>
