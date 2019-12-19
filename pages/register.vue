@@ -42,15 +42,15 @@
     <div class="wrapper">
        <section>
         <b-field label="Username">
-            <b-input maxlength="30" name="usernamefield"></b-input>
+            <b-input maxlength="30" v-model="name"></b-input>
         </b-field>
 
         <b-field label="Email">
-            <b-input type="email" maxlength="30" name="emailfield"></b-input>
+            <b-input type="email" maxlength="30" v-model="email"></b-input>
         </b-field>
 
         <b-field label="Password">
-            <b-input type="password" password-reveal name="passwordfield"></b-input>
+            <b-input type="password" password-reveal name="passwordfield" v-model="password"></b-input>
         </b-field>
 
         <b-field label="Confirm Password">
@@ -58,7 +58,7 @@
         </b-field>
         <br>
         <b-field>   
-            <button class="button is-info is-medium is-fullwidth registerbtn" type="submit">Register</button>
+            <button class="button is-info is-medium is-fullwidth registerbtn" @click="submitName()">Register</button>
         </b-field>
        </section>
     </div>
@@ -66,9 +66,19 @@
 </template>
 
 <script>
+import {namesRef} from '../plugins/firebase'
 
 export default {
-    
+    data(){
+      return{
+      name: 'OmairSohail'
+      }
+    },
+    methods:{
+      submitName(){
+       namesRef.push({name:this.name,email:this.email,password:this.password})
+      }
+    }
 }
 </script>
 

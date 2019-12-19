@@ -34,7 +34,9 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '~/plugins/simple-vue-validator'
+    '~/plugins/simple-vue-validator',
+    '~/plugins/firebase.js',
+    
   ],
   /*
   ** Nuxt.js dev-modules
