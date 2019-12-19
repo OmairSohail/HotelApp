@@ -1,18 +1,30 @@
 <template>
+<div>
+    <OnlyNavbar/>
+    <div class="container">
+        <br>
+        <br>
+        <br>
     <b-table :data="data" :columns="columns"></b-table>
+    </div>
+    <div class="Userlists">
+      <ul>
+          <li></li>
+      </ul>
+    </div>
+</div>
 </template>
 
 <script>
-import {namesRef} from '../plugins/firebase'
+import {db} from '../plugins/firebase'
+import OnlyNavbar from '../components/OnlyNavbar'
     export default {
+        components:{
+           OnlyNavbar
+        },
         data() {
             return {
                 data: [
-                    { 'id': 1, 'first_name': 'Jesse', 'last_name': 'Simmons', 'date': '2016-10-15 13:43:27', 'gender': 'Male' },
-                    { 'id': 2, 'first_name': 'John', 'last_name': 'Jacobs', 'date': '2016-12-15 06:00:53', 'gender': 'Male' },
-                    { 'id': 3, 'first_name': 'Tina', 'last_name': 'Gilbert', 'date': '2016-04-26 06:26:28', 'gender': 'Female' },
-                    { 'id': 4, 'first_name': 'Clarence', 'last_name': 'Flores', 'date': '2016-04-10 10:28:46', 'gender': 'Male' },
-                    { 'id': 5, 'first_name': 'Anne', 'last_name': 'Lee', 'date': '2016-12-06 14:38:38', 'gender': 'Female' }
                 ],
                 columns: [
                     {
@@ -22,24 +34,45 @@ import {namesRef} from '../plugins/firebase'
                         numeric: true
                     },
                     {
-                        field: 'first_name',
-                        label: 'First Name',
+                        field: 'Username',
+                        label: 'Username',
                     },
                     {
-                        field: 'last_name',
-                        label: 'Last Name',
+                        field: 'Email',
+                        label: 'Email',
                     },
                     {
-                        field: 'date',
+                        field: 'Date',
                         label: 'Date',
                         centered: true
                     },
                     {
-                        field: 'gender',
-                        label: 'Gender',
+                        field: 'Password',
+                        label: 'Password',
                     }
                 ]
             }
+        },
+        created(){
+           db.collection('Users').get()
+                .then((snapshot) => {
+                    snapshot.forEach((doc) => {
+                        //Data Object
+                    const data = {
+                      "id":doc.data().User_ID,
+                      "Username":doc.data().Username,
+                      "Email":doc.data().Email,
+                      "Date":doc.data().Create_At,
+                      "Password":doc.data().Password
+                    }
+                    this.data.push(data)
+                    
+                    //console.log(doc.id, '=>', doc.data());
+                    });
+                })
+                .catch((err) => {
+                    console.log('Error getting documents', err);
+                });
         }
     }
 </script>

@@ -69,8 +69,8 @@
 </template>
 
 <script>
-import {namesRef} from '../plugins/firebase'
-
+import {db} from '../plugins/firebase'
+import uuid from 'uuid'
 export default {
      
     data(){
@@ -82,9 +82,18 @@ export default {
     },
     methods:{
       submitName(){
-       namesRef.push({name:this.name,email:this.email,password:this.password})
-      }
+       //namesRef.push({name:this.name,email:this.email,password:this.password})
+      const colref = db.collection('Users').doc(this.name)
+      
+      let setUser = colref.set({
+        User_ID: uuid(),
+        Username: this.name,
+        Email: this.email,
+        Create_At: Date(),
+        Password:this.password
+      }).then(alert('user created ...'))
     }
+}
 }
 </script>
 
