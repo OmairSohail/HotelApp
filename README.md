@@ -1,6 +1,6 @@
 # HotelApp
 
-> My well-made Nuxt.js project
+> My Firebase CRUD Nuxt.js project
 
 ## Build Setup
 
@@ -20,3 +20,6 @@ $ npm run generate
 ```
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+
+
+User can Now Signup and Created users Will Be Showed
